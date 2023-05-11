@@ -59,7 +59,7 @@
 \end{abstract}
 
 \section{Data Wrangling}
-We first gathered historical data about Bitcoin from \url{coinmarketcap.com} and \url{coinmetrics.io}, and then we applied some data wrangling techniques to the data. We used the following features: 
+We first gathered historical data about Bitcoin from \href{https://coinmarketcap.com}{coinmarketcap} coinmarketcap and \href{https://coinmetrics.io}{coinmetrics}, and then we applied some data wrangling techniques to the data. We used the following features: 
 \begin{list}{-}{ }
     \item Logarithmic returns at lags $1$-$7$ days
     \item Volume
@@ -80,9 +80,26 @@ We first gathered historical data about Bitcoin from \url{coinmarketcap.com} and
     \item Adjusted on-chain volume
 \end{list}
 We also scaled the data to avoid numerical instabilities in the algorithms.
+\\Parkinson Volatility is a measure of the volatility of the price of a security, and it is defined as
+\begin{equation}
+    \sigma_P = \sqrt{\frac{1}{4\ln 2} \sum_{i=1}^4 \ln \left( \frac{H_i}{L_i} \right)^2}
+\end{equation}
+With $H_i$ and $L_i$ being the highest and lowest price of the security in the i-th period.
+\\The relative price change is defined as
+\begin{equation}
+    R_{pc} = 2 \cdot \frac{\text{high} - \text{low}}{\text{high} + \text{low}}
+\end{equation}
 
 \section{Classification}
-The first model we used is a logistic regression model, which yielded a pretty low accuracy on the validation set ($46.4\%$),
+For the classification part we have taken the positive class as the days in which the price of Bitcoin has increased, calculated as the difference between the closing price of the day and the closing price of the previous day.
+In this case we have used the log returns of the price at lag $1$ as features.
+So, the positive class is defined as
+\begin{equation}
+    \text{price}_{t+1} - \text{price}_t > 0
+\end{equation}
+For this reason, we have removed the last day from the dataset, because we don't have the price of the following day.
+\vspace{0.5cm}
+\\The first model we used is a logistic regression model, which yielded a pretty low accuracy on the validation set ($46.4\%$),
 so we decided to try more complex models.
 We then tested Support Vector Machines with various kernels and parameters,
 and then we picked the best model on the validation set.

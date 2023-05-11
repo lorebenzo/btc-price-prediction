@@ -82,9 +82,9 @@ We first gathered historical data about Bitcoin from \href{https://coinmarketcap
 We also scaled the data to avoid numerical instabilities in the algorithms.
 \\Parkinson Volatility is a measure of the volatility of the price of a security, and it is defined as
 \begin{equation}
-    \sigma_P = \sqrt{\frac{1}{4\ln 2} \sum_{i=1}^4 \ln \left( \frac{H_i}{L_i} \right)^2}
+    \sigma_P = \sqrt{\frac{1}{4\ln 2} \sum_{i=1}^n \ln \left( \frac{H_i}{L_i} \right)^2}
 \end{equation}
-With $H_i$ and $L_i$ being the highest and lowest price of the security in the i-th period.
+With $H_i$ and $L_i$ being the highest and lowest price of the security in the i-th period, and n the time period.
 \\The relative price change is defined as
 \begin{equation}
     R_{pc} = 2 \cdot \frac{\text{high} - \text{low}}{\text{high} + \text{low}}
